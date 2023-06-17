@@ -76,10 +76,14 @@ export const CHAIN_INFO_MAP: { [chainId: number]: Chain } = chains.reduce(
 );
 
 export const web3Config = createConfig({
-  autoConnect: false,
+  autoConnect: true,
   connectors: [
     new MetaMaskConnector({
       chains,
+      options: {
+        shimDisconnect: true,
+        UNSTABLE_shimOnConnectSelectAccount: true,
+      }
     }),
     new CoinbaseWalletConnector({
       chains,

@@ -32,7 +32,7 @@ export const theme = extendTheme({
   components: {
     Button: {
       baseStyle: {
-        borderRadius: '12px',
+        borderRadius: '8px',
         fontSize: '0.875rem',
       },
       variants: {

@@ -32,28 +32,28 @@ export const publicMenu = [
     icon: IoRocket
   },
   {
-    title: "BUIDLs",
-    href: "/buidls",
-    disabled: true
+    title: "Projects",
+    href: "/projects",
+    disabled: false
   },
-  {
-    title: "Power Pools",
-    href: "/power-pools",
-    disabled: true
-  },
-  {
-    title: "Grants",
-    href: "/grants",
-    disabled: true
-  },
+  // {
+  //   title: "Power Pools",
+  //   href: "/power-pools",
+  //   disabled: true
+  // },
+  // {
+  //   title: "Grants",
+  //   href: "/grants",
+  //   disabled: true
+  // },
   {
     title: "DAOs",
     href: "/daos",
-    disabled: true
+    disabled: false
   },
-  {
-    title: "News",
-    href: "/news",
-    disabled: true
-  }
+  // {
+  //   title: "News",
+  //   href: "/news",
+  //   disabled: true
+  // }
 ];

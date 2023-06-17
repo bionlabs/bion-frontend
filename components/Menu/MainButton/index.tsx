@@ -1,7 +1,7 @@
 "use client";
 
 import { useChain } from "@/hooks/useChain";
-import React, { Fragment } from "react";
+import React, {  } from "react";
 import ConnectButton from "./ConnectButton";
 import {
   Box,
@@ -11,10 +11,8 @@ import {
   IconButton,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuItem,
   MenuList,
-  Stack,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -25,22 +23,33 @@ import Image from "next/image";
 import { getChainIcon } from "@/utils/chains";
 import { CHAIN_INFO_MAP } from "@/configs/web3Config";
 import { RiLogoutBoxRLine } from "react-icons/ri";
-import {HiChevronRight} from "react-icons/hi";
-import {TbSwitch3} from 'react-icons/tb'
+import { HiChevronRight } from "react-icons/hi";
+import { TbSwitch3 } from "react-icons/tb";
 import styled from "@emotion/styled";
+import ClientOnly from "@/components/ClientOnly";
+import { useDisconnect } from "@/hooks/useDisconnect";
+import { useConnect } from "@/hooks/useConnect";
+
 
 const MainButton = () => {
   const { account } = useChain();
 
   const { data: balance } = useBalance({ address: account });
-  const { connector } = useAccount();
+  const { connector: activeConnector, isConnected } = useAccount();
   const { chainId } = useChain();
 
-  if (!account) {
-    return <ConnectButton />;
+  const { handleConnect } = useConnect({});
+  const { disconnect } = useDisconnect();
+
+  if (!isConnected || !account) {
+    return (
+      <ClientOnly>
+        <ConnectButton />
+      </ClientOnly>
+    );
   }
   return (
-    <Fragment>
+    <ClientOnly>
       <Menu placement="bottom-end" autoSelect={false}>
         <MenuButton
           as={Button}
@@ -67,11 +76,11 @@ const MainButton = () => {
               </Text>
             </VStack>
             <HStack>
-              {connector && (
+              {activeConnector && (
                 <HStack>
                   <Image
-                    src={getConnectorIcon(connector.id)}
-                    alt={connector.name}
+                    src={getConnectorIcon(activeConnector.id)}
+                    alt={activeConnector.name}
                     width={32}
                     height={32}
                   />
@@ -81,20 +90,15 @@ const MainButton = () => {
           </HStack>
         </MenuButton>
         <MenuList>
-          <VStack
-            p="20px 24px"
-            w="360px"
-            spacing="24px"
-            align="start"
-          >
+          <VStack p="20px 24px" w="360px" spacing="24px" align="start">
             <HStack w="100%" align="start" justify="space-between">
               <HStack>
                 <Box>
-                  {connector && (
+                  {activeConnector && (
                     <HStack>
                       <Image
-                        src={getConnectorIcon(connector.id)}
-                        alt={connector.name}
+                        src={getConnectorIcon(activeConnector.id)}
+                        alt={activeConnector.name}
                         width={48}
                         height={48}
                       />
@@ -119,6 +123,7 @@ const MainButton = () => {
                 }}
                 icon={<RiLogoutBoxRLine />}
                 fontSize={24}
+                onClick={disconnect}
               />
             </HStack>
             <VStack w="100%" spacing="16px" align="start">
@@ -127,39 +132,36 @@ const MainButton = () => {
                   Current Network
                 </Text>
                 <StyledMenuItem>
-                  <HStack w="100%" spacing='12px' justify='space-between'>
-                    <HStack w="100%" spacing='12px'>
-                      <Box position='relative'>
+                  <HStack w="100%" spacing="12px" justify="space-between">
+                    <HStack w="100%" spacing="12px">
+                      <Box position="relative">
                         <Image
                           src={getChainIcon(CHAIN_INFO_MAP[chainId].id) ?? ""}
                           alt={`chain:${chainId.toString()}`}
                           width={32}
                           height={32}
                         />
-                        <ActiveDot/>
+                        <ActiveDot />
                       </Box>
-                      <Text fontWeight={500}>{CHAIN_INFO_MAP[chainId].name}</Text>
+                      <Text fontWeight={500}>
+                        {CHAIN_INFO_MAP[chainId].name}
+                      </Text>
                     </HStack>
-                    <Icon
-                      as={HiChevronRight}
-                      color='neutral.300'
-                    />
+                    <Icon as={HiChevronRight} color="neutral.300" />
                   </HStack>
                 </StyledMenuItem>
               </VStack>
               <StyledMenuItem>
                 <HStack>
-                  <Icon as={TbSwitch3}/>
-                  <Text fontSize={14}>
-                    Switch Account
-                  </Text>
+                  <Icon as={TbSwitch3} />
+                  <Text fontSize={14}>Switch Account</Text>
                 </HStack>
               </StyledMenuItem>
             </VStack>
           </VStack>
         </MenuList>
       </Menu>
-    </Fragment>
+    </ClientOnly>
   );
 };
 

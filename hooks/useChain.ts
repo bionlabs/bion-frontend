@@ -27,6 +27,7 @@ export const useChain = () => {
     account,
     isConnected,
     switchChain,
-    provider
+    provider,
+    ...useNetwork()
   };
 };
