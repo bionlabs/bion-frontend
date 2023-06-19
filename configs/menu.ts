@@ -1,5 +1,6 @@
 import { IoDocumentText, IoHelpCircle, IoRocket , IoGlobeOutline } from "react-icons/io5";
 import { RiAppsFill } from "react-icons/ri";
+import {AiOutlineQuestionCircle} from "react-icons/ai";
 
 export const userMenu = [
     {
@@ -9,14 +10,15 @@ export const userMenu = [
         disabled: false
     },
     {
-        title: "Governance",
-        href: "/governance",
+        title: "Community",
+        href: "/community",
+        icon: IoGlobeOutline,
         disabled: false
     },
     {
         title: "Support",
         href: "/support",
-        icon: IoHelpCircle,
+        icon: AiOutlineQuestionCircle,
         disabled: false
     }
 ];

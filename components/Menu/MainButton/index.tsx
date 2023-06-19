@@ -1,7 +1,7 @@
 "use client";
 
 import { useChain } from "@/hooks/useChain";
-import React, {  } from "react";
+import React, { Fragment } from "react";
 import ConnectButton from "./ConnectButton";
 import {
   Box,
@@ -49,7 +49,7 @@ const MainButton = () => {
     );
   }
   return (
-    <ClientOnly>
+    <Fragment>
       <Menu placement="bottom-end" autoSelect={false}>
         <MenuButton
           as={Button}
@@ -57,6 +57,8 @@ const MainButton = () => {
           p="12px"
           variant="outline"
           borderColor="neutral.400"
+          borderRadius="12px"
+          maxH='60px'
         >
           <HStack spacing={4}>
             <HStack>
@@ -68,7 +70,7 @@ const MainButton = () => {
               />
             </HStack>
             <VStack spacing="5px" align="start">
-              <Text fontSize={14}>
+              <Text fontSize={14} fontWeight={500}>
                 {Number(balance?.formatted).toFixed(3)} {balance?.symbol}
               </Text>
               <Text fontSize={12} color="neutral.300">
@@ -161,7 +163,7 @@ const MainButton = () => {
           </VStack>
         </MenuList>
       </Menu>
-    </ClientOnly>
+    </Fragment>
   );
 };
 

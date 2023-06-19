@@ -60,6 +60,7 @@ export const theme = extendTheme({
       baseStyle: {
         dialog: {
           bg: palettes.colors.neutral[500],
+          borderRadius: '20px',
         }
       },
       
@@ -69,7 +70,7 @@ export const theme = extendTheme({
         list: {
           bg: palettes.colors.neutral[500],
           borderColor: palettes.colors.neutral[400],
-          borderRadius: '16px',
+          borderRadius: '20px',
         },
         item: {
           bg: 'inherit',

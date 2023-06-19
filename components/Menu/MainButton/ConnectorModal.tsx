@@ -31,9 +31,9 @@ const ConnectorModal = ({ isOpen, onClose }: ConnectorModalProps) => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Connect your wallet</ModalHeader>
+        <ModalHeader pt={6} px={8}>Connect your wallet</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
+        <ModalBody px={8}>
           <VStack align="start" w="100%">
             {connectors.map((connector, index) => (
               <Button
@@ -77,7 +77,7 @@ const ConnectorModal = ({ isOpen, onClose }: ConnectorModalProps) => {
           </VStack>
         </ModalBody>
 
-        <ModalFooter justifyContent="start">
+        <ModalFooter justifyContent="start" px={8} pb={6}>
           <Box fontSize={13} color="neutral.200">
             By continuing, you agree to the{" "}
             <Text as="a" href="/" color="primary.500" display="inline-block">
