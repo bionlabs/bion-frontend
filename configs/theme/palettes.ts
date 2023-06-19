@@ -22,6 +22,7 @@ export const palettes = {
     green: {
       100: "#E6F6ED",
       200: "#C2F6D9",
+      400: '#30E0A1',
       500: "#03A64E",
       600: "#039546",
     },

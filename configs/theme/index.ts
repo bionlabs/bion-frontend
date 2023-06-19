@@ -76,6 +76,16 @@ export const theme = extendTheme({
           bg: 'inherit',
         }
       }
+    },
+    Progress: {
+      baseStyle: {
+        track: {
+          // bg: palettes.colors.primary[500],
+        },
+        filledTrack: {
+          bg: palettes.colors.primary[500],
+        }
+      }
     }
   }
 });
