@@ -8,7 +8,7 @@ import LaunchpadCard from "@/components/Card/Launchpad/LaunchpadCard";
 const UpcomingSale = () => {
   const { launchpads } = useFetchSales();
 
-  console.log(process.env.NEXT_PUBLIC_API_URL)
+  // console.log(process.env.NEXT_PUBLIC_API_URL)
 
   return (
     <VStack w="100%" align="start" spacing={5} py="4rem">
