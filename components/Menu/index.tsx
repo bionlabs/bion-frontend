@@ -13,6 +13,7 @@ import {
   Icon,
   HStack,
   IconButton,
+  useColorMode,
 } from "@chakra-ui/react";
 import Logo from "./Logo";
 import { publicMenu, userMenu } from "@/configs/menu";
@@ -21,16 +22,21 @@ import MainButton from "./MainButton";
 import styled from "@emotion/styled";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useDevice } from "@/hooks/useDevice";
-import { HiOutlineMenu } from "react-icons/hi";
+import { HiOutlineMenu, HiSun, HiMoon } from "react-icons/hi";
 
 const Menu = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const { isDesktop } = useDevice();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Fragment>
-      <Wrapper boxShadow={{ lg: "md" }} bg="neutral.500">
-        <Container maxW="100%" px={4} py={3}>
+      <Wrapper
+        boxShadow={{ lg: "sm" }}
+        borderBottom="1px solid"
+        borderColor={colorMode === "light" ? "gray.100" : "gray.700"}
+      >
+        <Container maxW="container.xxl" px={4} py={3}>
           <Flex w="100%" justify="space-between" align="center">
             <HStack align="center" spacing={4}>
               <Logo />
@@ -41,8 +47,6 @@ const Menu = ({ children }: { children: React.ReactNode }) => {
                       placeholder="Search BUIDLs, Hackathons..."
                       width={{ base: "auto", lg: "300px" }}
                       variant="filled"
-                      focusBorderColor="neutral.400"
-                      size="sm"
                       borderRadius={{ base: "md", lg: "md" }}
                       _placeholder={{ fontSize: 14 }}
                     />
@@ -56,78 +60,53 @@ const Menu = ({ children }: { children: React.ReactNode }) => {
                     </InputRightElement>
                   </InputGroup>
                 </Box>
-              ): (
+              ) : (
                 <IconButton
                   aria-label="Search"
-                  icon={<IoSearch/>}
+                  icon={<IoSearch />}
                   variant="ghost"
                 />
-              )
-            }
+              )}
             </HStack>
             <HStack align="center" spacing={1} minH="60px">
               {isDesktop ? (
-              userMenu.map((item, index) => (
-                <Button
-                  key={index}
-                  variant="ghost"
-                  fontSize={14}
-                  isDisabled={item.disabled}
-                  px={2}
-                  py={2}
-                  h="auto"
-                  alignItems="center"
-                  leftIcon={
-                    item.icon ? (
-                      <Icon as={item.icon} fontSize={16} />
-                    ) : undefined
-                  }
-                >
-                  {item.title}
-                </Button>
-              ))) : (
+                publicMenu.map((item, index) => {
+                  const isActive = pathname.startsWith(item.href);
+                  return (
+                    <Button
+                      key={index}
+                      variant={isActive ? "tertiary" : "tertiary"}
+                      fontSize={14}
+                      px={3}
+                      h={8}
+                      isDisabled={item.disabled}
+                      color={isActive ? "primary.500" : "inherit"}
+                    >
+                      {item.title}
+                    </Button>
+                  );
+                })
+              ) : (
                 <IconButton
                   aria-label="Menu"
-                  icon={<HiOutlineMenu/>}
-                  variant='ghost'
+                  icon={<HiOutlineMenu />}
+                  variant="ghost"
                   fontSize={24}
                   order={2}
                 />
-              )
-            }
-              <Box ml={1} order={isDesktop ? 'unset' : 1}>
+              )}
+              <HStack ml={1} order={isDesktop ? "unset" : 1}>
+                <IconButton
+                  aria-label="Toggle Color Mode"
+                  variant="tertiary"
+                  px={3}
+                  icon={colorMode === "light" ? <HiMoon /> : <HiSun />}
+                  onClick={toggleColorMode}
+                />
                 <MainButton />
-              </Box>
+              </HStack>
             </HStack>
           </Flex>
-        </Container>
-        <Container maxW="100%" px={4} py={2} bg="neutral.500">
-          <HStack align="center" spacing={3}>
-            <ButtonGroup>
-              {publicMenu.map((item, index) => {
-                const isActive = pathname.startsWith(item.href);
-                return (
-                  <Button
-                    key={index}
-                    variant={isActive ? "tertiary" : "ghost"}
-                    fontSize={14}
-                    px={3}
-                    h={8}
-                    isDisabled={item.disabled}
-                    leftIcon={
-                      item.icon ? (
-                        <Icon as={item.icon} w="16px" h="16px" />
-                      ) : undefined
-                    }
-                    bg={isActive ? "neutral.0" : "inherit"}
-                    color={isActive ? "neutral.600" : "inherit"}
-                  >
-                    {item.title}
-                  </Button>
-                );
-              })}
-            </ButtonGroup>
-          </HStack>
         </Container>
       </Wrapper>
       <Inner>{children}</Inner>
@@ -141,10 +120,11 @@ const Wrapper = styled(Box)`
   width: 100%;
   top: 0;
   left: 0;
-  height: 132px;
+  height: 84px;
+  background: inherit;
 `;
 const Inner = styled(Box)`
-  padding-top: 132px;
+  padding-top: 84px;
 `;
 
 export default Menu;

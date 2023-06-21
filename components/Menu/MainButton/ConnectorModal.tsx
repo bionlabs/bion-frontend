@@ -14,6 +14,7 @@ import {
   useDisclosure,
   Text,
   VStack,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useConnect } from "@/hooks/useConnect";
 import Image from "next/image";
@@ -26,6 +27,7 @@ interface ConnectorModalProps {
 
 const ConnectorModal = ({ isOpen, onClose }: ConnectorModalProps) => {
   const { handleConnect, connectors } = useConnect({});
+  const {colorMode} = useColorMode();
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -38,7 +40,7 @@ const ConnectorModal = ({ isOpen, onClose }: ConnectorModalProps) => {
             {connectors.map((connector, index) => (
               <Button
                 key={index}
-                variant="connectorButton"
+                variant="solid"
                 w="100%"
                 h="auto"
                 px="16px"
@@ -64,7 +66,7 @@ const ConnectorModal = ({ isOpen, onClose }: ConnectorModalProps) => {
                     <Box
                       ml="auto"
                       borderRadius="999px"
-                      bg="whiteAlpha.200"
+                      bg={colorMode == 'dark' ? "whiteAlpha.200" : "blackAlpha.200"}
                       px={3}
                       py={1}
                       fontSize={12}
@@ -78,7 +80,7 @@ const ConnectorModal = ({ isOpen, onClose }: ConnectorModalProps) => {
         </ModalBody>
 
         <ModalFooter justifyContent="start" px={8} pb={6}>
-          <Box fontSize={13} color="neutral.200">
+          <Box fontSize={13} color="neutral.300">
             By continuing, you agree to the{" "}
             <Text as="a" href="/" color="primary.500" display="inline-block">
               Terms and conditions.

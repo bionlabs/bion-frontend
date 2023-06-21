@@ -1,3 +1,7 @@
+import { StyleFunctionProps } from "@chakra-ui/react";
+import { mode } from '@chakra-ui/theme-tools'
+
+
 export const palettes = {
   colors: {
     neutral: {
@@ -31,6 +35,10 @@ export const palettes = {
       200: "#FBCCCC",
       500: "#E53E3E",
       600: "#BD3838",
+    },
+    navbar: {
+      bg: "#fff",
+      color: "#141518",
     }
   },
-};
+}

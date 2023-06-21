@@ -27,6 +27,7 @@ const TrendingCard = ({
       bg={`url(${image})`}
       w={{ base: "100%", lg: "640px" }}
       h={{ base: "360px", lg: "360px" }}
+      color='neutral.0'
     >
       <DetailBox maxW={{base: '100%' , lg:"450px"}} ml={{ base: 6, lg: 10 }} mb={{ base: 6, lg: 10 }}>
         <VStack align="start" spacing={6}>

@@ -25,6 +25,7 @@ import {
   VStack,
   Text,
   HStack,
+  useColorMode,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useDisconnect } from "@/hooks/useDisconnect";
@@ -113,6 +114,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [accessToken, onClose]);
 
+  const {colorMode} = useColorMode();
+
   return (
     <Fragment>
       {children}
@@ -137,7 +140,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
           <ModalFooter
             justifyContent="start"
             borderTop="1px solid"
-            borderColor="neutral.400"
+            borderColor={colorMode =='dark' ? "neutral.400": 'neutral.100'}
             gap={2}
           >
             <Button

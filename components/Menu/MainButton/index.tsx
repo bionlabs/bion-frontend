@@ -15,6 +15,7 @@ import {
   MenuList,
   Text,
   VStack,
+  useColorMode,
 } from "@chakra-ui/react";
 import { shortenAddress } from "@/utils/format";
 import { useAccount, useBalance } from "wagmi";
@@ -56,7 +57,7 @@ const MainButton = () => {
           h="fit-content"
           p="12px"
           variant="outline"
-          borderColor="neutral.400"
+          // borderColor="neutral.400"
           borderRadius="12px"
           maxH='60px'
         >
@@ -168,14 +169,16 @@ const MainButton = () => {
 };
 
 const StyledMenuItem = (props: any) => {
+  const {colorMode} = useColorMode();
+
   return (
     <MenuItem
       p="12px"
       borderRadius="8px"
       border="1px solid"
-      borderColor="neutral.400"
+      borderColor={colorMode == 'dark' ? "neutral.400" : 'neutral.100'}
       _hover={{
-        bg: "neutral.400",
+        bg: colorMode == 'dark' ? "neutral.400" : 'neutral.50',
       }}
       {...props}
     />
