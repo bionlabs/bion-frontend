@@ -9,7 +9,7 @@ const Logo = () => {
   const {colorMode} = useColorMode();
   return (
     <Link href="/">
-      <Image src={isDesktop ? colorMode === 'dark' ? "/logo_light.svg" : '/logo.svg' : '/favicon.svg'} alt="Bion Network" width={isDesktop ? 200 : 40} height={isDesktop ? 50 : 40} />
+      <Image src={colorMode === 'dark' ? "/logo_light.svg" : '/logo.svg'} alt="Bion Network" width={150} height={50} />
     </Link>
   );
 };

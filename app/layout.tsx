@@ -3,7 +3,7 @@ import { Open_Sans, Inter } from "next/font/google";
 import Providers from "./providers";
 import Menu from "@/components/Menu";
 
-const inter = Inter({ subsets: ["latin"] });
+const openSans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata = {
   title: "BionNetwork - Community platform for Builders and Investors",
@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={openSans.className}>
         <Providers>
           <Menu>{children}</Menu>
         </Providers>

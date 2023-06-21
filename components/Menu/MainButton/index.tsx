@@ -31,7 +31,6 @@ import ClientOnly from "@/components/ClientOnly";
 import { useDisconnect } from "@/hooks/useDisconnect";
 import { useConnect } from "@/hooks/useConnect";
 
-
 const MainButton = () => {
   const { account } = useChain();
 
@@ -42,6 +41,8 @@ const MainButton = () => {
   const { handleConnect } = useConnect({});
   const { disconnect } = useDisconnect();
 
+  const { colorMode } = useColorMode();
+
   if (!isConnected || !account) {
     return (
       <ClientOnly>
@@ -49,6 +50,7 @@ const MainButton = () => {
       </ClientOnly>
     );
   }
+
   return (
     <Fragment>
       <Menu placement="bottom-end" autoSelect={false}>
@@ -57,9 +59,11 @@ const MainButton = () => {
           h="fit-content"
           p="12px"
           variant="outline"
-          // borderColor="neutral.400"
           borderRadius="12px"
-          maxH='60px'
+          maxH="60px"
+          bg={colorMode === "dark" ? "neutral.400" : "primary.50"}
+          _hover={{ bg: colorMode === "dark" ? "neutral.350" : "primary.100" }}
+          _active={{ bg: colorMode === "dark" ? "neutral.350" : "primary.100" }}
         >
           <HStack spacing={4}>
             <HStack>
@@ -70,11 +74,14 @@ const MainButton = () => {
                 height={32}
               />
             </HStack>
-            <VStack spacing="5px" align="start">
-              <Text fontSize={14} fontWeight={500}>
+            <VStack spacing="5px" align="start" lineHeight={1}>
+              <Text fontSize={14} fontWeight={600}>
                 {Number(balance?.formatted).toFixed(3)} {balance?.symbol}
               </Text>
-              <Text fontSize={12} color="neutral.300">
+              <Text
+                fontSize={12}
+                color={colorMode == "dark" ? "neutral.300" : "gray.400"}
+              >
                 {shortenAddress(account)}
               </Text>
             </VStack>
@@ -109,7 +116,7 @@ const MainButton = () => {
                   )}
                 </Box>
                 <VStack spacing="8px" align="start">
-                  <Text fontSize={16} lineHeight={1} fontWeight={500}>
+                  <Text fontSize={16} lineHeight={1} fontWeight={600}>
                     {shortenAddress(account)}
                   </Text>
                   <Text fontSize={14} color="neutral.300" lineHeight={1}>
@@ -144,9 +151,15 @@ const MainButton = () => {
                           width={32}
                           height={32}
                         />
-                        <ActiveDot />
+                        <ActiveDot
+                          boxShadow={
+                            colorMode == "dark"
+                              ? "rgb(35, 35, 38) 0px 0px 0px 2px"
+                              : "rgb(255, 255, 255) 0px 0px 0px 2px"
+                          }
+                        />
                       </Box>
-                      <Text fontWeight={500}>
+                      <Text fontWeight={600}>
                         {CHAIN_INFO_MAP[chainId].name}
                       </Text>
                     </HStack>
@@ -169,16 +182,16 @@ const MainButton = () => {
 };
 
 const StyledMenuItem = (props: any) => {
-  const {colorMode} = useColorMode();
+  const { colorMode } = useColorMode();
 
   return (
     <MenuItem
       p="12px"
       borderRadius="8px"
       border="1px solid"
-      borderColor={colorMode == 'dark' ? "neutral.400" : 'neutral.100'}
+      borderColor={colorMode == "dark" ? "neutral.400" : "neutral.100"}
       _hover={{
-        bg: colorMode == 'dark' ? "neutral.400" : 'neutral.50',
+        bg: colorMode == "dark" ? "neutral.400" : "neutral.50",
       }}
       {...props}
     />
@@ -192,7 +205,6 @@ const ActiveDot = styled(Box)`
   top: 60%;
   right: 0px;
   background-color: rgb(0, 211, 149);
-  box-shadow: rgb(35, 35, 38) 0px 0px 0px 2px;
 `;
 
 export default MainButton;

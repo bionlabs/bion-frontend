@@ -2,7 +2,7 @@ import { IoDocumentText, IoHelpCircle, IoRocket , IoGlobeOutline } from "react-i
 import { RiAppsFill } from "react-icons/ri";
 import {AiOutlineQuestionCircle} from "react-icons/ai";
 
-export const userMenu = [
+export const submenu = [
     {
         title: "Dashboard",
         href: "/dashboard",

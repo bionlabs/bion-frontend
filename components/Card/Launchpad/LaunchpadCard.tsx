@@ -13,6 +13,7 @@ import {
   TabPanel,
   Progress,
   Button,
+  useColorMode,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { nFormatter } from "@/utils/format";
@@ -25,9 +26,15 @@ interface LaunchpadCardProps {
 const LaunchpadCard = ({ launchpad }: LaunchpadCardProps) => {
   const { currentCap, progress, unit, endTimeFormatted } =
     useLaunchpad(launchpad);
+  const { colorMode } = useColorMode();
 
   return (
-    <Wrapper border="1px solid" borderColor="neutral.400" bg="neutral.500">
+    <Wrapper
+      border="1px solid"
+      borderColor={colorMode == "dark" ? "gray.700" : "gray.200"}
+      bg={colorMode == "dark" ? "neutral.500" : "neutral.0"}
+      boxShadow="md"
+    >
       <Image
         src={launchpad.banner}
         alt={launchpad.title}
@@ -107,11 +114,7 @@ const LaunchpadCard = ({ launchpad }: LaunchpadCardProps) => {
                     {progress}%
                   </Text>
                 </HStack>
-                <Progress
-                  value={progress}
-                  w="100%"
-                  borderRadius="50px"
-                />
+                <Progress value={progress} w="100%" borderRadius="50px" />
 
                 <HStack justify="space-between" w="100%">
                   <Text fontSize={14} color="neutral.300">

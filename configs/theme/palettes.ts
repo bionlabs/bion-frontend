@@ -11,6 +11,7 @@ export const palettes = {
       150: "#D0D5DD",
       200: "#BFC5CF",
       300: "#646d7a",
+      350: "#30313a",
       400: "#2a2b33",
       500: "#1E1F25",
       600: "#141518",
@@ -19,6 +20,7 @@ export const palettes = {
     primary: {
       50: "#F4F7FE",
       100: "#E9F0FC",
+      400: "#0f7fff",
       500: "#2364E5",
       600: "#205ACE",
       700: "#1D4DB8",

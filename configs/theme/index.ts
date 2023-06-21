@@ -45,6 +45,9 @@ export const theme = extendTheme({
             bg: palettes.colors.primary[700],
           }
         }),
+        link: {
+          color: palettes.colors.primary[400],
+        },
         connectorButton: {
           bg: palettes.colors.neutral[400],
           _hover: {
@@ -76,6 +79,7 @@ export const theme = extendTheme({
           bg: mode(palettes.colors.neutral[0], palettes.colors.neutral[500])(props),
           borderColor: mode(palettes.colors.neutral[50], palettes.colors.neutral[400])(props),
           borderRadius: '20px',
+          boxShadow: 'lg'
         },
         item: {
           bg: 'inherit',
